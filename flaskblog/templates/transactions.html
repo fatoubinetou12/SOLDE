@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Transactions</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          
+          <div class="row">
+            <div class="col-md-12">
+              <h2>Entrées</h2>
+              <form method="POST" action="">
+                {{ form_entrees.hidden_tag() }}
+                <div class="form-group">
+                  <label for="{{ form_entrees.libelle.id }}">{{ form_entrees.libelle.label }}</label>
+                  {{ form_entrees.libelle() }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form_entrees.amount.id }}">{{ form_entrees.amount.label }}</label>
+                  {{ form_entrees.amount() }}
+                </div>
+                {{ form_entrees.submit_entees() }}
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>Sortie</h2>
+          <form method="POST" action="">
+            {{ form_sortie.hidden_tag() }}
+            <div class="form-group">
+              <label for="{{ form_sortie.libelle.id }}">{{ form_sortie.libelle.label }}</label>
+              {{ form_sortie.libelle() }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form_sortie.amount.id }}">{{ form_sortie.amount.label }}</label>
+              {{ form_sortie.amount() }}
+            </div>
+            {{ form_sortie.submit_sortie() }}
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Solde: {{ solde }}</h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <h1>Historiques</h1>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Libelle</th>
+                    <th>Montant</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for entree in entrees %}
+                  <td>Entree</td>
+                  <td>{{ entree.Libelle_entrees }}</td>
+                  <td>{{ entree.montant_entrees }}</td>
+                  <td>
+                    <a href="{{ url_for('delete_entree', id=entree.id) }}" class="delete-button">Supprimer</a>
+                  </td>
+                </tr>
+                {% endfor %}
+            
+                {% for depense in depenses %}
+                <tr>
+                  <td>Depense</td>
+                  <td>{{ depense.Libelle_depenses }}</td>
+                  <td>{{ depense.montant_depenses }}</td>
+                  <td>
+                    <a href="{{ url_for('delete_depense', id=depense.id) }}" class="delete-button">Supprimer</a>
+                  </td>
+                </tr>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+         
+           
+  
+  {% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Récapitulatif des transactions pour {{ user.username }}</h1>
+
+<table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Libelle</th>
+
+        <th>Montant</th>
+
+      
+      </tr>
+    </thead>
+    <tbody>
+      {% for entree in entrees %}
+      <tr>
+        <td>Entree</td>
+        <td>{{ entree.Libelle_entrees }}</td>
+        <td>{{ entree.montant_entrees }}</td>
+      </tr>
+      {% endfor %}
+  
+      {% for depense in depenses %}
+      <tr>
+        <td>Depense</td>
+        <td>{{ depense.Libelle_depenses }}</td>
+        <td>{{ depense.montant_depenses }}</td>
+      </tr>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+<button onclick="window.print()">Imprimer</button>
+{% endblock %}
